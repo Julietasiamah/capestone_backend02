@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Set;
 
 @RestController
@@ -16,6 +17,7 @@ import java.util.Set;
 public class AuthController {
 
     private final AppUserService appUserService;
+
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current-user")
@@ -44,6 +46,23 @@ public class AuthController {
                 loginRequest.getUsername(),
                 loginRequest.getPassword()
         );
-        return ResponseEntity.ok(new AuthResponse(token));
+        AppUser user = appUserService.findByUsername(loginRequest.getUsername() ).orElse(null);
+        return ResponseEntity.ok(new AuthResponse(token, new UserDTO(user)));
     }
+
+//    @PutMapping ("api/user/update")
+//
+//    public ResponseEntity <?> updateUser (@RequestBody UpdateUserRequest request, Principal principal){
+//        String username = principal.getName();
+//        appUserService.updateUser(username, request);
+//        return ResponseEntity.ok("User updated successfully");
+//    }
+//
+//    @GetMapping("me")
+//    @PreAuthorize("isAuthenticated()")
+//    public ResponseEntity<UpdateUserRequest> getCurrentUser (Principal principal){
+//        UpdateUserRequest currentUser = appUserService.getCurrentUser(principal.getName());
+//        return ResponseEntity.ok(currentUser);
+//    }
+
 }

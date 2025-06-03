@@ -65,11 +65,33 @@ public class AppUserService {
     }
 
 
-    public AppUser getUserByUsername(String username)  {
-        AppUser appUser = appUserRepository.findByUsername(username)
-            .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con username: " + username));
+
+//
+//    public AppUser getUserByUsername(String username)  {
+//        AppUser appUser = appUserRepository.findByUsername(username)
+//            .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con username: " + username));
+//
+//
+//        return appUser;
+//    }
+
+//    public void updateUser (String username, UpdateUserRequest request){
+//        AppUser appUser = appUserRepository.findByUsername(username)
+//                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con username: " + username));
+//
+//        appUser.setEmail(request.getEmail());
+//        appUser.setUsername(request.getUsername());
+//        appUser.setPassword(passwordEncoder.encode(request.getPassword()));
+//
+//        appUserRepository.save(appUser);
+//    }
+//
+//    public UpdateUserRequest getCurrentUser(String username) {
+//        AppUser appUser = appUserRepository.findByUsername(username)
+//                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con username: " + username));
+//
+//        return new UpdateUserRequest(appUser.getEmail(), appUser.getUsername(), appUser.getPassword());
+//    }
 
 
-        return appUser;
-    }
 }

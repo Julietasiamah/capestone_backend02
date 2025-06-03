@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 
 public class RegisterRequest {
+
     String name;
     String surname;
     String email;
