@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,9 +52,15 @@ public class PianoSettimanaleController {
 
     // GET - Piani dell'utente autenticato
     @GetMapping("/miei")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<List<PianoSettimanaleDTO>> getMieiPiani() {
         return ResponseEntity.ok(pianoSettimanaleService.getPianiUtenteAutenticato());
     }
 
-
+    @PostMapping("/salva")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<Void> salvaPiano(@RequestBody List<PianoSettimanaleDTO> piano) {
+        pianoSettimanaleService.salvaPiano(piano);
+        return ResponseEntity.ok().build();
+    }
 }

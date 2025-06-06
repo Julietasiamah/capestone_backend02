@@ -78,6 +78,7 @@ public class PianoSettimanaleService {
 
 
     public void salvaPiano(List<PianoSettimanaleDTO> dtoList) {
+        AppUser utente = getUtenteAutenticato();
         for (PianoSettimanaleDTO dto : dtoList) {
 
             Ricetta ricetta = dto.getPasto().getRicetta();
@@ -94,6 +95,7 @@ public class PianoSettimanaleService {
             entity.setGiorno(dto.getGiorno());
             entity.setCategoriaPasto(dto.getCategoriaPasto());
             entity.setPasto(pastoSalvato);
+            entity.setUtente(utente);
 
             repository.save(entity);
         }

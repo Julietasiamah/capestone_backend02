@@ -64,7 +64,7 @@ public class JwtTokenUtil {
                 .setSubject(userDetails.getUsername())
                 .claim("roles", roles) // Aggiunge i ruoli come claim
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationInMs * 1000))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }

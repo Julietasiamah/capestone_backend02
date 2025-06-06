@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -38,6 +40,9 @@ public class PianoSettimanaleEntity {
     @ManyToOne
     @JoinColumn(name = "utente_id")
     private AppUser utente;
+
+
+
 
 
 
